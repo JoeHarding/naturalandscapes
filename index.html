@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NaturaLandscapes — Landscape & Garden Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #fafaf8;
+      --off-white:  #f2f0eb;
+      --green-dark: #2a4a2e;
+      --green-mid:  #3d6b42;
+      --green-light:#6a9b6e;
+      --green-pale: #d4e6d5;
+      --green-mist: #eaf2ea;
+      --text:       #1e2d1f;
+      --text-muted: #5a7060;
+      --border:     #c8ddc9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      background: var(--green-dark);
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #ffffff;
+      letter-spacing: .02em;
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      background: #ffffff;
+      padding: .6rem 1.4rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--green-pale); }
+
+    /* ── HERO ── */
+    #hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 3rem 5rem 5rem;
+    }
+
+    .hero-tag {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--green-light);
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      line-height: 1.1;
+      color: var(--green-dark);
+      margin-bottom: 1.8rem;
+      letter-spacing: -.01em;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--green-mid);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 38ch;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; align-items: center; }
+
+    .btn-primary {
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--green-dark);
+      padding: .9rem 2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); }
+
+    .btn-ghost {
+      font-size: .85rem;
+      font-weight: 400;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: gap .2s;
+    }
+    .btn-ghost:hover { gap: .9rem; }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-img-grid {
+      position: absolute;
+      inset: 2rem 0 2rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: .8rem;
+      border-radius: 1.5rem 0 0 1.5rem;
+      overflow: hidden;
+    }
+
+    .hero-img-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .hero-img-grid img:hover { transform: scale(1.04); }
+    .hero-img-grid .span-tall { grid-row: span 2; }
+
+    .hero-stat {
+      position: absolute;
+      bottom: 4rem;
+      left: 3rem;
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.1rem 1.6rem;
+      box-shadow: 0 8px 32px rgba(42,74,46,.12);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .stat-icon { font-size: 1.6rem; }
+    .stat-val { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--green-dark); line-height: 1; }
+    .stat-label { font-size: .75rem; color: var(--text-muted); }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      background: var(--green-dark);
+      color: var(--green-pale);
+      padding: .9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-item {
+      font-size: .78rem;
+      font-weight: 400;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 0 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .marquee-item::after { content: '✦'; color: var(--green-light); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SERVICES ── */
+    #services { padding: 7rem 5rem; background: var(--white); }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: .7rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: var(--green-dark);
+      line-height: 1.15;
+    }
+
+    .section-desc {
+      font-size: .95rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 36ch;
+      text-align: right;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--green-mist);
+      border: 1px solid var(--border);
+      border-radius: 1.2rem;
+      padding: 2.4rem;
+      transition: transform .25s, box-shadow .25s, background .25s;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(42,74,46,.12);
+      background: var(--white);
+    }
+
+    .service-icon {
+      width: 3.2rem; height: 3.2rem;
+      border-radius: .8rem;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--green-dark);
+      margin-bottom: .7rem;
+    }
+
+    .service-desc { font-size: .88rem; line-height: 1.7; color: var(--text-muted); }
+
+    /* ── GALLERY ── */
+    #gallery { padding: 7rem 5rem; background: var(--off-white); }
+    #gallery .section-header { margin-bottom: 3rem; }
+
+    .gallery-filter {
+      display: flex;
+      gap: .6rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: .45rem 1.1rem;
+      border-radius: 2rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--green-dark);
+      color: var(--white);
+      border-color: var(--green-dark);
+    }
+
+    .gallery-masonry { columns: 3; column-gap: 1rem; }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item img { width: 100%; display: block; transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(30,45,31,.7) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .35s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.2rem 1.4rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+    .gallery-caption { color: var(--white); font-size: .88rem; letter-spacing: .02em; }
+    .gallery-caption span { display: block; font-size: .72rem; opacity: .7; margin-top: .2rem; }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(20,30,20,.92);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn .2s ease;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 88vw; max-height: 88vh;
+      border-radius: .8rem;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      width: 2.6rem; height: 2.6rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.3);
+      background: transparent;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.15); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 7rem 5rem;
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-images { position: relative; height: 540px; }
+
+    .about-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 80%; height: 90%;
+      object-fit: cover;
+      border-radius: 1.5rem;
+    }
+    .about-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%; height: 55%;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      border: 5px solid var(--white);
+      box-shadow: 0 12px 36px rgba(42,74,46,.15);
+    }
+
+    .about-badge {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: var(--green-dark);
+      color: var(--white);
+      border-radius: 1rem;
+      padding: 1rem 1.2rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(42,74,46,.25);
+    }
+    .badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--green-pale); display: block; line-height: 1; }
+    .badge-text { font-size: .72rem; letter-spacing: .08em; opacity: .75; margin-top: .3rem; }
+
+    .about-content .section-label { margin-bottom: .6rem; }
+    .about-content .section-title { margin-bottom: 1.4rem; }
+    .about-text { font-size: .95rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1rem; }
+
+    .about-values { margin-top: 2rem; display: flex; flex-direction: column; gap: .9rem; }
+    .value-row { display: flex; align-items: flex-start; gap: .9rem; }
+    .value-dot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--green-mid); margin-top: .45rem; flex-shrink: 0; }
+    .value-text { font-size: .9rem; line-height: 1.55; color: var(--text-muted); }
+    .value-text strong { color: var(--green-dark); font-weight: 500; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { padding: 7rem 5rem; background: var(--green-dark); }
+    #testimonials .section-label { color: var(--green-pale); opacity: .7; }
+    #testimonials .section-title { color: var(--white); }
+    #testimonials .section-header { margin-bottom: 3.5rem; }
+
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+    .testimonial-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 1.2rem;
+      padding: 2.2rem;
+      transition: background .2s;
+    }
+    .testimonial-card:hover { background: rgba(255,255,255,.1); }
+
+    .stars { color: #a8d5a2; font-size: .9rem; margin-bottom: 1.2rem; letter-spacing: .1em; }
+
+    .testimonial-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: rgba(255,255,255,.88);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author { display: flex; align-items: center; gap: .9rem; }
+    .author-avatar {
+      width: 2.6rem; height: 2.6rem;
+      border-radius: 50%;
+      background: var(--green-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .95rem; font-weight: 500; color: white; flex-shrink: 0;
+    }
+    .author-name { font-size: .9rem; font-weight: 500; color: var(--white); }
+    .author-loc { font-size: .78rem; color: rgba(255,255,255,.45); }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 7rem 5rem;
+      background: var(--off-white);
+      display: block;
+      text-align: center;
+    }
+
+    .contact-info .section-title { margin-bottom: 1.2rem; }
+    .contact-desc { font-size: .95rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 2.5rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1.1rem; }
+    .contact-row { display: flex; align-items: center; gap: 1rem; }
+    .contact-ico {
+      width: 2.4rem; height: 2.4rem;
+      background: var(--green-pale);
+      border-radius: .6rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-val { font-size: .9rem; color: var(--text-muted); }
+
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 1.4rem;
+      padding: 2.8rem;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1rem; }
+    .form-group label {
+      font-size: .78rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem; font-weight: 300;
+      color: var(--text);
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: .7rem;
+      padding: .75rem 1rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 3px rgba(61,107,66,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem; font-weight: 500;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--white);
+      background: var(--green-dark);
+      border: none;
+      border-radius: 2rem;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      margin-top: .5rem;
+    }
+    .btn-submit:hover { background: var(--green-mid); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,.55);
+      padding: 3rem 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--white); }
+    .footer-copy { font-size: .8rem; }
+    .footer-links { display: flex; gap: 1.8rem; }
+    .footer-links a {
+      font-size: .8rem; letter-spacing: .05em;
+      color: rgba(255,255,255,.45); text-decoration: none; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+    .fade-up:nth-child(5) { transition-delay: .4s; }
+    .fade-up:nth-child(6) { transition-delay: .5s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 6rem 2.5rem 4rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; gap: 1rem; }
+      #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .about-images { height: 340px; }
+      #navbar { padding: 0 1.5rem; }
+      #services, #gallery, #about, #testimonials, #contact { padding: 5rem 2.5rem; }
+      footer { padding: 2.5rem; }
+      .gallery-masonry { columns: 2; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: .8rem; }
+      .section-desc { text-align: left; }
+    }
+    @media (max-width: 640px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-masonry { columns: 1; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">NaturaLandscapes</a>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Landscape & Garden Design</p>
+    <h1 class="hero-headline">Gardens that<br><em>breathe life</em><br>into every space</h1>
+    <p class="hero-sub">We craft beautiful, sustainable outdoor spaces — from intimate courtyard gardens to sweeping landscape designs. Let's create something that grows with you.</p>
+    <div class="hero-actions">
+      <a href="#gallery" class="btn-primary">View Our Work</a>
+      <a href="#contact" class="btn-ghost">Get a Quote →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <img class="span-tall" src="img4.jpg" alt="Garden with raised stone wall and lawn" />
+      <img src="img8.jpg" alt="Wooden panel fencing with lawn" />
+      <img src="img9.jpg" alt="Garden with trees and raised beds" />
+    </div>
+    <div class="hero-stat">
+      <span class="stat-icon">🌿</span>
+      <div>
+        <div class="stat-val">500+</div>
+        <div class="stat-label">gardens transformed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Landscape Design</span>
+    <span class="marquee-item">Garden Maintenance</span>
+    <span class="marquee-item">Patio & Decking</span>
+    <span class="marquee-item">Planting Schemes</span>
+    <span class="marquee-item">Lawn Care</span>
+    <span class="marquee-item">Water Features</span>
+    <span class="marquee-item">Lighting Design</span>
+    <span class="marquee-item">Hedge Trimming</span>
+    <span class="marquee-item">Landscape Design</span>
+    <span class="marquee-item">Garden Maintenance</span>
+    <span class="marquee-item">Patio & Decking</span>
+    <span class="marquee-item">Planting Schemes</span>
+    <span class="marquee-item">Lawn Care</span>
+    <span class="marquee-item">Water Features</span>
+    <span class="marquee-item">Lighting Design</span>
+    <span class="marquee-item">Hedge Trimming</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="section-header">
+    <div>
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our Services</h2>
+    </div>
+    <p class="section-desc">From concept to completion, every project is handled with skill and passion.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon">🌳</div>
+      <h3 class="service-name">Landscape Design</h3>
+      <p class="service-desc">Full garden design from initial concept to planting plan, tailored to your space, lifestyle, and vision.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">✂️</div>
+      <h3 class="service-name">Garden Maintenance</h3>
+      <p class="service-desc">Regular upkeep to keep your garden looking its best all year round, including mowing, pruning, and seasonal care.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🪨</div>
+      <h3 class="service-name">Patio & Hard Landscaping</h3>
+      <p class="service-desc">Patios, paths, raised beds, and retaining walls crafted from quality materials that stand the test of time.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🌱</div>
+      <h3 class="service-name">Planting & Borders</h3>
+      <p class="service-desc">Carefully curated planting schemes to provide colour, texture, and interest through every season.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">💧</div>
+      <h3 class="service-name">Water Features</h3>
+      <p class="service-desc">Bespoke ponds, fountains, and water features that bring movement and tranquillity to your garden.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🪵</div>
+      <h3 class="service-name">Fencing</h3>
+      <p class="service-desc">Supply and installation of all fencing types including closeboard, panel, post and rail, and stock fencing to secure and define your boundaries.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Our Portfolio</p>
+      <h2 class="section-title">Recent Projects</h2>
+    </div>
+    <p class="section-desc">A selection of gardens we've had the pleasure of creating and caring for.</p>
+  </div>
+  <div class="gallery-filter">
+    <button class="filter-btn active" onclick="filterGallery(this,'all')">All</button>
+    <button class="filter-btn" onclick="filterGallery(this,'design')">Design</button>
+    <button class="filter-btn" onclick="filterGallery(this,'maintenance')">Maintenance</button>
+    <button class="filter-btn" onclick="filterGallery(this,'hard')">Hard Landscaping</button>
+    <button class="filter-btn" onclick="filterGallery(this,'planting')">Planting</button>
+  </div>
+  <div class="gallery-masonry" id="gallery-grid">
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img1.jpg" alt="Gravel driveway with wooden fencing" />
+      <div class="gallery-overlay"><div class="gallery-caption">Gravel Driveway<span>Hard Landscaping</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img2.jpg" alt="Hedge with wire fencing" />
+      <div class="gallery-overlay"><div class="gallery-caption">Hedge & Stock Fencing<span>Fencing & Boundaries</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img3.jpg" alt="Hedge fencing with gravel path" />
+      <div class="gallery-overlay"><div class="gallery-caption">Gravel Path & Hedging<span>Hard Landscaping</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="design" onclick="openLightbox(this)">
+      <img src="img4.jpg" alt="Garden with raised stone wall and lawn" />
+      <div class="gallery-overlay"><div class="gallery-caption">Raised Garden & Turfing<span>Full Garden Design</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img5.jpg" alt="Gravel area with pergola and hedging" />
+      <div class="gallery-overlay"><div class="gallery-caption">Gravel & Stock Fencing<span>Hard Landscaping</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img6.jpg" alt="Porcelain tiled side passage" />
+      <div class="gallery-overlay"><div class="gallery-caption">Porcelain Side Passage<span>Hard Landscaping</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img7.jpg" alt="Patio slabs beside house" />
+      <div class="gallery-overlay"><div class="gallery-caption">Patio Installation<span>Hard Landscaping</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img8.jpg" alt="Wooden panel fencing with lawn" />
+      <div class="gallery-overlay"><div class="gallery-caption">Panel Fencing<span>Fencing & Boundaries</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="design" onclick="openLightbox(this)">
+      <img src="img9.jpg" alt="Garden with trees fence and raised beds" />
+      <div class="gallery-overlay"><div class="gallery-caption">Garden Renovation<span>Full Garden Design</span></div></div>
+    </div>
+    <div class="gallery-item fade-up" data-cat="hard" onclick="openLightbox(this)">
+      <img src="img10.jpg" alt="Wooden panel fence" />
+      <div class="gallery-overlay"><div class="gallery-caption">Closeboard Fencing<span>Fencing & Boundaries</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<section id="about">
+  <div class="about-images fade-up">
+    <img class="about-img-main" src="img9.jpg" alt="Garden project" />
+    <img class="about-img-accent" src="img4.jpg" alt="Completed garden" />
+    <div class="about-badge">
+      <span class="badge-num">16</span>
+      <div class="badge-text">Years of<br>experience</div>
+    </div>
+  </div>
+  <div class="about-content fade-up">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">Rooted in a passion<br>for the outdoors</h2>
+    <p class="about-text">With over 16 years of experience, NaturaLandscapes has built a reputation for quality craftsmanship and reliable service. From fencing and patios to full garden transformations, we take pride in every project we undertake.</p>
+    <p class="about-text">We work closely with each customer to understand their vision and deliver results that exceed expectations — on time, on budget, and built to last.</p>
+    <div class="about-values">
+      <div class="value-row">
+        <div class="value-dot"></div>
+        <p class="value-text"><strong>Sustainability first</strong> — we prioritise native planting, rainwater harvesting, and wildlife-friendly design.</p>
+      </div>
+      <div class="value-row">
+        <div class="value-dot"></div>
+        <p class="value-text"><strong>Honest, transparent pricing</strong> — detailed quotes with no hidden costs or surprises.</p>
+      </div>
+      <div class="value-row">
+        <div class="value-dot"></div>
+        <p class="value-text"><strong>Guaranteed quality</strong> — all our work comes with a 2-year satisfaction guarantee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="contact" style="padding: 7rem 5rem; background: var(--off-white); text-align: center;">
+  <div class="fade-up">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title" style="margin-bottom: 1.5rem;">Ready to transform your outdoor space?</h2>
+    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); max-width: 55ch; margin: 0 auto 2.5rem;">
+      Contact NaturaLandscapes today for a free, no-obligation quote. We'd love to hear about your project and help bring your vision to life.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+      <a href="tel:07709578023" style="display: flex; align-items: center; gap: .8rem; background: var(--white); border: 1px solid var(--border); border-radius: 1rem; padding: 1.2rem 2rem; text-decoration: none; color: var(--text); transition: box-shadow .2s;">
+        <span style="font-size: 1.4rem;">📞</span>
+        <div style="text-align: left;">
+          <div style="font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .2rem;">Call Us</div>
+          <div style="font-size: 1rem; font-weight: 500; color: var(--green-dark);">07709 578023</div>
+        </div>
+      </a>
+      <a href="mailto:naturalandscapes12@gmail.com" style="display: flex; align-items: center; gap: .8rem; background: var(--white); border: 1px solid var(--border); border-radius: 1rem; padding: 1.2rem 2rem; text-decoration: none; color: var(--text); transition: box-shadow .2s;">
+        <span style="font-size: 1.4rem;">✉️</span>
+        <div style="text-align: left;">
+          <div style="font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: .2rem;">Email Us</div>
+          <div style="font-size: 1rem; font-weight: 500; color: var(--green-dark);">naturalandscapes12@gmail.com</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">NaturaLandscapes</span>
+  <span class="footer-copy">© 2025 NaturaLandscapes Gardens Ltd. All rights reserved.</span>
+  <nav class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#gallery">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function filterGallery(btn, cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const match = cat === 'all' || item.dataset.cat === cat;
+      item.style.opacity = match ? '1' : '0.25';
+      item.style.pointerEvents = match ? 'auto' : 'none';
+    });
+  }
+
+  function openLightbox(item) {
+    document.getElementById('lightbox-img').src = item.querySelector('img').src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if (!e || e.target !== document.getElementById('lightbox-img')) {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  function handleSubmit() {
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = "✓ Enquiry Sent — We'll be in touch!";
+    btn.style.background = 'var(--green-light)';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
